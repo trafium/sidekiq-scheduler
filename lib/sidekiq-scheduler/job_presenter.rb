@@ -22,7 +22,7 @@ module SidekiqScheduler
     def next_time
       execution_time = SidekiqScheduler::RedisManager.get_job_next_time(name)
 
-      "#{Time.parse(execution_time)} (#{relative_time(Time.parse(execution_time))})" if execution_time
+      "#{Time.parse(execution_time).in_time_zone('Moscow')} (#{relative_time(Time.parse(execution_time))})" if execution_time
     end
 
     # Returns the last execution time for the job
